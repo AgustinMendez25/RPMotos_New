@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RP Motos — Repuestos de motos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5efe6;
+    --surface:#fffaf3;
+    --ink:#2b241d;
+    --ink-dim:#6c6255;
+    --line:#e4d9c8;
+    --accent:#b5502e;
+    --accent-2:#7a6a4f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:'Work Sans', sans-serif; line-height:1.65;}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  h1,h2,.serif{font-family:'Fraunces', serif;}
+
+  header{padding:26px 0; border-bottom:1px solid var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between;}
+  .logo{font-family:'Fraunces', serif; font-weight:600; font-size:22px;}
+  .nav-links{display:flex; gap:34px; font-size:14px; color:var(--ink-dim);}
+  .nav-links a:hover{color:var(--ink);}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 24px; font-size:14px; font-weight:500; border-radius:2px;}
+  .btn-primary{background:var(--accent); color:#fffaf3;}
+  .btn-outline{border:1px solid var(--ink); color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:var(--surface);}
+
+  .hero{padding:80px 0 60px;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;}
+  .eyebrow{font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:block;}
+  h1{font-size:clamp(34px,4.6vw,54px); font-weight:600; line-height:1.08;}
+  .hero p{margin-top:22px; color:var(--ink-dim); font-size:17px; max-width:440px;}
+  .hero-ctas{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .hero-img{border-radius:6px; overflow:hidden; aspect-ratio:4/5; background-size:cover; background-position:center;}
+
+  .section{padding:76px 0; border-top:1px solid var(--line);}
+  .section-head{max-width:600px; margin-bottom:48px;}
+  .kicker{color:var(--accent); font-size:13px; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px;}
+  h2{font-size:clamp(26px,3.2vw,38px); font-weight:600;}
+  .section-sub{color:var(--ink-dim); margin-top:12px;}
+
+  .branches{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .branch-card{background:var(--surface); padding:36px;}
+  .branch-num{font-family:'Fraunces'; color:var(--accent); font-size:14px; margin-bottom:14px;}
+  .branch-photo{height:200px; background-size:cover; background-position:center; border-radius:4px; margin-bottom:22px;}
+  .branch-name{font-family:'Fraunces'; font-size:22px; font-weight:600; margin-bottom:16px;}
+  .branch-info{display:flex; flex-direction:column; gap:10px; margin-bottom:26px; font-size:14.5px; color:var(--ink-dim);}
+  .branch-row{display:flex; gap:10px;}
+  .branch-row b{color:var(--ink); font-weight:500;}
+  .branch-map{
+    width:100%; height:150px; border-radius:4px; overflow:hidden; margin-bottom:22px; border:1px solid var(--line);
+  }
+  .branch-map iframe{width:100%; height:100%; border:0; display:block; filter:sepia(0.18) saturate(0.9);}
+  .branch-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .branch-actions .btn{font-size:13px; padding:11px 18px;}
+
+  .reviews-top{display:flex; align-items:center; gap:22px; margin-bottom:36px; flex-wrap:wrap;}
+  .rating-score{font-family:'Fraunces'; font-weight:600; font-size:46px; color:var(--accent);}
+  .stars{color:var(--accent); font-size:16px; letter-spacing:2px;}
+  .rating-meta{color:var(--ink-dim); font-size:13.5px;}
+  .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .review-card{background:var(--surface); padding:26px;}
+  .review-stars{color:var(--accent); font-size:13px; margin-bottom:12px;}
+  .review-text{font-family:'Fraunces'; font-style:italic; font-size:15px; color:var(--ink); line-height:1.6; margin-bottom:16px;}
+  .review-author{font-weight:500; font-size:13px;}
+  .review-source{color:var(--ink-dim); font-size:12px;}
+
+  footer{padding:40px 0; border-top:1px solid var(--line);}
+  .footer-grid{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .footer-note{color:var(--ink-dim); font-size:13px;}
+
+  @media (max-width:820px){
+    .hero-grid, .branches, .review-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .hero-img{order:-1; aspect-ratio:16/10;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 18px;}
+    .hero{padding:56px 0 40px;}
+    .hero-ctas{flex-direction:column; align-items:stretch;}
+    .hero-ctas .btn{justify-content:center;}
+    .section{padding:48px 0;}
+    .branch-card{padding:24px;}
+    .footer-grid{flex-direction:column; align-items:flex-start; text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><img src="logo.png" alt="RP Motos" style="height:64px; width:auto; display:block;"></div>
+    <nav class="nav-links">
+      <a href="#sucursales">Sucursales</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a href="#tienda" class="btn btn-primary">Tienda online</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Repuestos de moto desde San Martín y Villa Urquiza</span>
+      <h1>El repuesto justo, en el local de siempre</h1>
+      <p>Dos sucursales pensadas para que encuentres lo que buscás rápido — y ahora, también podés comprarlo sin moverte de tu casa.</p>
+      <div class="hero-ctas">
+        <a href="#sucursales" class="btn btn-primary">Ver sucursales</a>
+        <a href="#tienda" class="btn btn-outline">Tienda online</a>
+      </div>
+    </div>
+    <div class="hero-img" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3F17lZSbvqFyVdkAw5cPAT5L8pf/hf_20260716_172024_397d73cf-6836-4584-ad8b-5e04942d3e0d.png')"></div>
+  </div>
+</section>
+
+<section class="section" id="sucursales">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Nuestras sucursales</div>
+      <h2>Dos locales, la misma dedicación</h2>
+      <p class="section-sub">Elegí el más cercano para retirar tu pedido o simplemente pasar a consultar.</p>
+    </div>
+    <div class="branches">
+      <div class="branch-card">
+        <div class="branch-num">01 — San Martín</div>
+        <div class="branch-photo" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3F17lZSbvqFyVdkAw5cPAT5L8pf/hf_20260716_172024_397d73cf-6836-4584-ad8b-5e04942d3e0d.png')"></div>
+        <div class="branch-name">Sucursal San Martín</div>
+        <div class="branch-info">
+          <div class="branch-row"><b>Dirección</b></div>
+          <div class="branch-row">Av. República del Líbano 4101, San Martín, Buenos Aires</div>
+          <div class="branch-row"><b>Horario</b></div>
+          <div class="branch-row">Lunes a viernes de 9:00 a 12:30 hs y de 14:00 a 18:00 hs</div>
+        </div>
+        <div class="branch-map">
+          <iframe src="https://www.google.com/maps?q=RP+Motos,+Rep%C3%BAblica+del+L%C3%ADbano+4101,+San+Mart%C3%ADn,+Buenos+Aires&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Sucursal San Martín"></iframe>
+        </div>
+        <div class="branch-actions">
+          <a class="btn btn-outline" href="https://maps.app.goo.gl/DWA9vaWRLtbtdpnTA" target="_blank" rel="noopener">Ver en Maps</a>
+          <a class="btn btn-primary" href="#tienda">Ir a la tienda</a>
+        </div>
+      </div>
+      <div class="branch-card">
+        <div class="branch-num">02 — Villa Urquiza</div>
+        <div class="branch-photo" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3F17lZSbvqFyVdkAw5cPAT5L8pf/hf_20260716_172024_397d73cf-6836-4584-ad8b-5e04942d3e0d.png'); background-position:70% center;"></div>
+        <div class="branch-name">Sucursal Villa Urquiza</div>
+        <div class="branch-info">
+          <div class="branch-row"><b>Dirección</b></div>
+          <div class="branch-row">Av. de los Constituyentes 5763, Villa Urquiza, CABA</div>
+          <div class="branch-row"><b>Horario</b></div>
+          <div class="branch-row">Lunes a viernes de 9:30 a 13:00 hs y de 14:00 a 18:00 hs</div>
+          <div class="branch-row">Feriados: cerrado</div>
+        </div>
+        <div class="branch-map">
+          <iframe src="https://www.google.com/maps?q=RP+Motos,+Av.+de+los+Constituyentes+5763,+Villa+Urquiza,+Buenos+Aires&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Sucursal Villa Urquiza"></iframe>
+        </div>
+        <div class="branch-actions">
+          <a class="btn btn-outline" href="https://maps.app.goo.gl/YmPpFSAVk9zfyZUD8?g_st=aw" target="_blank" rel="noopener">Ver en Maps</a>
+          <a class="btn btn-primary" href="#tienda">Ir a la tienda</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="resenas">
+  <div class="wrap">
+    <div class="kicker">Reseñas de Google</div>
+    <div class="reviews-top">
+      <div class="rating-score">4.8</div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <div class="rating-meta">Reseñas reales de Google My Business — este bloque se conecta al widget oficial</div>
+      </div>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Ejemplo de reseña — acá se integra el contenido real desde Google My Business.</p>
+        <div class="review-author">Nombre del cliente</div>
+        <div class="review-source">Google · hace 2 semanas</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Ejemplo de reseña — acá se integra el contenido real desde Google My Business.</p>
+        <div class="review-author">Nombre del cliente</div>
+        <div class="review-source">Google · hace 1 mes</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Ejemplo de reseña — acá se integra el contenido real desde Google My Business.</p>
+        <div class="review-author">Nombre del cliente</div>
+        <div class="review-source">Google · hace 1 mes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap footer-grid">
+    <div class="logo">RP Motos</div>
+    <div class="footer-note">© 2026 RP Motos · San Martín y Villa Urquiza, Buenos Aires</div>
+  </div>
+</footer>
+
+</body>
+</html>
